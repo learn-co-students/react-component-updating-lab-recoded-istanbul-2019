@@ -12,44 +12,55 @@ class Timer extends Component {
 
   //Your code here
 
+  componentDidUpdate(){
+    this.timer.current.style.color = `#${Math.floor(Math.random()* 16 ** 6).toString(16)}`
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return this.state.time !== nextState.time 
+  }
+
+
   componentDidMount() {
-    this.interval = setInterval(
-      this.clockTick,
-      this.props.updateInterval * 1000
-    );
+    this.interval = setInterval(this.clockTick, this.props.updateInterval*1000)
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   render() {
-    const { time, color, logText } = this.state;
+    const { time, color, className, logText } = this.state
     return (
-      <section className="Timer" style={{ background: color }} ref={this.timer}>
-        <h1>{time}</h1>
-        <button onClick={this.stopClock}>Stop</button>
-        <aside className="logText">{logText}</aside>
-        <small onClick={this.handleClose}>X</small>
+      <section className="Timer" style={{background: color}} ref={this.timer}>
+
+        <h1>{ time }</h1>
+        <button onClick={ this.stopClock }>Stop</button>
+        <aside className="logText">{ logText }</aside>
+        <small onClick={ this.handleClose }>X</small>
+
       </section>
     );
   }
 
+
   clockTick = () => {
     this.setState(prevState => ({
       time: prevState.time + this.props.updateInterval
-    }));
-  };
+    }))
+  }
 
   stopClock = () => {
-    clearInterval(this.interval);
-    this.setState({ className: "hidden" });
-  };
+    clearInterval(this.interval)
+    this.setState({className: "hidden"})
+  }
 
   // for the 'x' button,
   handleClose = () => {
-    this.props.removeTimer(this.props.id);
-  };
+    this.props.removeTimer(this.props.id)
+  }
+
+
 }
 
 export default Timer;
