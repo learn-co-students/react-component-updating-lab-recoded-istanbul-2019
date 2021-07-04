@@ -19,7 +19,7 @@ class App extends Component {
     console.log(this.state.timerIDs);
     return (
       <div className="App">
-        <header>
+        <header>learn open react-component-updating-lab
           <h1>MultiTimer</h1>
           <Controls updateIntervalSetting={this.updateIntervalSetting} updateInterval={this.state.updateInterval} handleAddTimer={this.handleAddTimer}/>
         </header>
